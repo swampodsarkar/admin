@@ -236,15 +236,19 @@
         const res = await fetch(url + '?ts=' + Date.now());
         const data = await res.json();
         const h = quickHash(data);
-        if (h === prevHash) { isLoading = false; return; }
+        if (h === prevHash && prevHash !== '') { isLoading = false; return; }
         prevHash = h;
 
         document.getElementById('loadingState').style.display = 'none';
         document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString();
 
-        if (!data) {
+        if (!data || Object.keys(data).length === 0) {
           document.getElementById('noDataState').style.display = 'block';
           document.getElementById('usersSection').style.display = 'none';
+          document.getElementById('totalDevices').textContent = '0';
+          document.getElementById('activeToday').textContent = '0';
+          document.getElementById('totalTimeToday').textContent = '0m';
+          document.getElementById('totalBlocked').textContent = '0';
           isLoading = false;
           return;
         }
