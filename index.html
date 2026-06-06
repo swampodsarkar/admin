@@ -90,8 +90,19 @@
     </div>
   </div>
 
-  <script src="firebase-config.js"></script>
   <script>
+    // Firebase Config
+    const FIREBASE_CONFIG = {
+      apiKey: "AIzaSyCfwz5irJzMy1UGzVhqb4rmqL4z-jeeJzA",
+      authDomain: "minerx-market.firebaseapp.com",
+      databaseURL: "https://minerx-market-default-rtdb.firebaseio.com",
+      projectId: "minerx-market",
+      storageBucket: "minerx-market.firebasestorage.app",
+      messagingSenderId: "1080849676320",
+      appId: "1:1080849676320:web:1faa3502ad7899c6192445",
+      measurementId: "G-E0SGPXWBQ4"
+    };
+
     let prevHash = '';
     let isLoading = false;
 
@@ -107,8 +118,8 @@
     function getTodayKey() { return new Date().toISOString().slice(0, 10); }
 
     function getFirebaseUrl(path) {
-      if (!firebaseConfig || !firebaseConfig.databaseURL || firebaseConfig.databaseURL.includes('YOUR_PROJECT')) return null;
-      return firebaseConfig.databaseURL.replace(/\/+$/, '') + '/' + path.replace(/^\//, '') + '.json';
+      if (!FIREBASE_CONFIG.databaseURL || FIREBASE_CONFIG.databaseURL.includes('YOUR_PROJECT')) return null;
+      return FIREBASE_CONFIG.databaseURL.replace(/\/+$/, '') + '/' + path.replace(/^\//, '') + '.json';
     }
 
     function toast(msg, type) {
